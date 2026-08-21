@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Monde Shaun Masoka — IT Graduate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f2f6fa;
+    --paper-line: rgba(27, 58, 75, 0.08);
+    --ink: #1b3a4b;
+    --ink-soft: #4c6a7a;
+    --panel: #ffffff;
+    --accent: #ff6b35;
+    --accent-soft: #ffe4d6;
+    --accent-2: #2f9e6f;
+    --line: #c7d6df;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size: 34px 34px;
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+  }
+
+  a { color: inherit; }
+
+  .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* --- Nav --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(242, 246, 250, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nav-mark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+    margin-left: 20px;
+    letter-spacing: 0.03em;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* --- Hero --- */
+  .hero {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 70px 24px 50px;
+  }
+  .hero .label { display: block; margin-bottom: 14px; }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .hero .role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin-bottom: 26px;
+  }
+  .hero .role::before { content: "// "; color: var(--accent); }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--panel);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .pill:hover { background: var(--ink); color: var(--paper); }
+  .pill.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .pill.primary:hover { background: #e35a26; border-color: #e35a26; color: #fff; }
+
+  /* --- Trace divider (signature element) --- */
+  .trace {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .trace svg { width: 100%; height: 20px; display: block; }
+  .trace line { stroke: var(--line); stroke-width: 2; }
+  .trace circle { fill: var(--paper); stroke: var(--accent); stroke-width: 2; }
+
+  /* --- Sections --- */
+  section {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 46px 24px;
+  }
+  section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    margin: 6px 0 22px;
+  }
+  section > .label { display: block; }
+
+  /* --- About --- */
+  #about p { max-width: 62ch; color: var(--ink-soft); margin: 0 0 16px; }
+  #about p strong { color: var(--ink); font-weight: 600; }
+
+  /* --- Skills --- */
+  .skill-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+  }
+  .skill-group h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    padding: 5px 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--ink);
+  }
+  .chip.soft { border-style: dashed; color: var(--accent-2); border-color: var(--accent-2); }
+
+  /* --- Education timeline --- */
+  .timeline { position: relative; padding-left: 26px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 5px; top: 6px; bottom: 6px;
+    width: 2px;
+    background: var(--line);
+  }
+  .t-item { position: relative; margin-bottom: 22px; }
+  .t-item::before {
+    content: "";
+    position: absolute;
+    left: -26px; top: 4px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+  }
+  .t-item h3 { margin: 0 0 2px; font-size: 1rem; font-family: 'Space Grotesk', sans-serif; }
+  .t-item .meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--ink-soft); }
+
+  .cert-list {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .cert-list li {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    padding: 10px 12px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 3px;
+  }
+
+  /* --- Experience / projects --- */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .project-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .project-card .level {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .project-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.02rem;
+    margin: 6px 0 10px;
+  }
+  .project-card ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.9rem; }
+  .project-card li { margin-bottom: 4px; }
+
+  /* --- Contact --- */
+  .contact-panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 26px 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .contact-item .label { display: block; margin-bottom: 6px; }
+  .contact-item a, .contact-item span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.02rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .contact-item a:hover { color: var(--accent); }
+
+  footer {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 30px 24px 60px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-mark">MSM</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="label">NCV IT Level 4 Graduate</span>
+  <h1>Monde Shaun Masoka</h1>
+  <p class="role">building and troubleshooting systems, one component at a time</p>
+  <div class="hero-links">
+    <a class="pill primary" href="mailto:mondemasoka123@gmail.com">Email me</a>
+    <a class="pill" href="tel:+27774538300">077 453 830</a>
+    <a class="pill" href="https://github.com/Champion2026gif" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</header>
+
+<div class="trace">
+  <svg viewBox="0 0 880 20" preserveAspectRatio="none"><line x1="0" y1="10" x2="880" y2="10"/><circle cx="40" cy="10" r="4"/><circle cx="440" cy="10" r="4"/><circle cx="840" cy="10" r="4"/></svg>
+</div>
+
+<section id="about">
+  <span class="label">01 — About</span>
+  <h2>Who I am</h2>
+  <p>I'm an NCV IT graduate from False Bay College, with a solid base in programming, networking, hardware, and multimedia. Over three years of study, I've moved from the basics of computer assembly right up to building small software systems and designing databases. I like understanding how something works underneath, not just how to use it.</p>
+  <p>Most of what I know comes from hands-on projects: writing a small web application in JavaScript, setting up and securing a wireless network, assembling a computer from raw parts, and mapping out a database with UML diagrams before building it in SQL. I've also worked with graphics, video, and audio editing, so I can bring a creative side to a technical problem when needed.</p>
+  <p>What drives me is problem-solving — finding the reason something is broken and fixing it properly. I want to keep learning and grow into a role where I can apply IT skills to real challenges, whether that's in networking, software development, or support. This page will grow as I take on more projects.</p>
+</section>
+
+<div class="trace">
+  <svg viewBox="0 0 880 20" preserveAspectRatio="none"><line x1="0" y1="10" x2="880" y2="10"/><circle cx="120" cy="10" r="4"/><circle cx="500" cy="10" r="4"/></svg>
+</div>
+
+<section id="skills">
+  <span class="label">02 — Skills</span>
+  <h2>Skills &amp; competencies</h2>
+  <div class="skill-groups">
+    <div class="skill-group">
+      <h3>Programming &amp; development</h3>
+      <div class="chip-row">
+        <span class="chip">VB.NET</span>
+        <span class="chip">Java</span>
+        <span class="chip">Debugging</span>
+        <span class="chip">Testing</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Networking &amp; data comms</h3>
+      <div class="chip-row">
+        <span class="chip">LAN/WAN setup</span>
+        <span class="chip">IP addressing</span>
+        <span class="chip">Troubleshooting</span>
+        <span class="chip">Security principles</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Hardware &amp; software</h3>
+      <div class="chip-row">
+        <span class="chip">OS installation</span>
+        <span class="chip">Maintenance</span>
+        <span class="chip">Troubleshooting</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Systems analysis &amp; design</h3>
+      <div class="chip-row">
+        <span class="chip">UML diagrams</span>
+        <span class="chip">Database design</span>
+        <span class="chip">Process modelling</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Multimedia &amp; content creation</h3>
+      <div class="chip-row">
+        <span class="chip">Graphic design</span>
+        <span class="chip">Video/audio editing</span>
+        <span class="chip">Animation</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Electronics &amp; IT support</h3>
+      <div class="chip-row">
+        <span class="chip">Basic circuit design</span>
+        <span class="chip">IT service management</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="skill-group" style="margin-top:26px;">
+    <h3>Soft skills</h3>
+    <div class="chip-row">
+      <span class="chip soft">Problem-solving &amp; critical thinking</span>
+      <span class="chip soft">Communication &amp; technical writing</span>
+      <span class="chip soft">Teamwork &amp; collaboration</span>
+      <span class="chip soft">Time management &amp; organisation</span>
+      <span class="chip soft">Adaptability &amp; continuous learning</span>
+    </div>
+  </div>
+</section>
+
+<div class="trace">
+  <svg viewBox="0 0 880 20" preserveAspectRatio="none"><line x1="0" y1="10" x2="880" y2="10"/><circle cx="220" cy="10" r="4"/><circle cx="660" cy="10" r="4"/></svg>
+</div>
+
+<section id="education">
+  <span class="label">03 — Education</span>
+  <h2>Education &amp; certifications</h2>
+  <div class="timeline">
+    <div class="t-item">
+      <h3>National Certificate in Information Technology — NQF Level 2</h3>
+      <div class="meta">False Bay College · 2022</div>
+    </div>
+    <div class="t-item">
+      <h3>National Certificate in Information Technology — NQF Level 3</h3>
+      <div class="meta">False Bay College · 2023</div>
+    </div>
+    <div class="t-item">
+      <h3>National Certificate in Information Technology — NQF Level 4</h3>
+      <div class="meta">False Bay College · 2024</div>
+    </div>
+  </div>
+  <ul class="cert-list">
+    <li>CompTIA IT Fundamentals (ITF+)</li>
+    <li>Cisco CCNA (Basic Networking)</li>
+    <li>Microsoft Office Specialist</li>
+    <li>Cybersecurity Basics</li>
+  </ul>
+</section>
+
+<div class="trace">
+  <svg viewBox="0 0 880 20" preserveAspectRatio="none"><line x1="0" y1="10" x2="880" y2="10"/><circle cx="80" cy="10" r="4"/><circle cx="380" cy="10" r="4"/><circle cx="760" cy="10" r="4"/></svg>
+</div>
+
+<section id="experience">
+  <span class="label">04 — Experience</span>
+  <h2>Academic projects</h2>
+  <p style="color:var(--ink-soft); margin-top:-10px; max-width:62ch;">I'm early in my career, so my hands-on experience so far comes from applied coursework projects rather than paid roles — each one mirrors a real IT task from start to finish.</p>
+  <div class="project-grid">
+    <div class="project-card">
+      <span class="level">Level 4</span>
+      <h3>Software Development Project</h3>
+      <ul>
+        <li>Built a small web application using JavaScript</li>
+        <li>Implemented basic database functions and user authentication</li>
+        <li>Debugged and tested the app for performance improvements</li>
+      </ul>
+    </div>
+    <div class="project-card">
+      <span class="level">Level 3–4</span>
+      <h3>Networking Setup &amp; Configuration</h3>
+      <ul>
+        <li>Designed and configured a small network with routers, switches, and IP addressing</li>
+        <li>Set up and secured a wireless network with encryption protocols</li>
+        <li>Troubleshot common network issues and improved connectivity</li>
+      </ul>
+    </div>
+    <div class="project-card">
+      <span class="level">Level 2–3</span>
+      <h3>Computer Assembly &amp; Maintenance</h3>
+      <ul>
+        <li>Assembled a computer from components, installed OS and drivers</li>
+        <li>Performed hardware troubleshooting and basic system upgrades</li>
+        <li>Documented system maintenance procedures for efficiency</li>
+      </ul>
+    </div>
+    <div class="project-card">
+      <span class="level">Level 4</span>
+      <h3>Database &amp; Systems Design</h3>
+      <ul>
+        <li>Created UML diagrams and process models for a system project</li>
+        <li>Designed and implemented a small database system using SQL</li>
+        <li>Developed queries and reports for data management</li>
+      </ul>
+    </div>
+    <div class="project-card">
+      <span class="level">Level 2–3</span>
+      <h3>Multimedia Content Creation</h3>
+      <ul>
+        <li>Designed and edited graphics, animations, and interactive media</li>
+        <li>Used industry-standard tools for video/audio editing</li>
+        <li>Created a multimedia project for digital marketing / education</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="trace">
+  <svg viewBox="0 0 880 20" preserveAspectRatio="none"><line x1="0" y1="10" x2="880" y2="10"/><circle cx="440" cy="10" r="4"/></svg>
+</div>
+
+<section id="contact">
+  <span class="label">05 — Contact</span>
+  <h2>Get in touch</h2>
+  <div class="contact-panel">
+    <div class="contact-item">
+      <span class="label">Email</span>
+      <a href="mailto:mondemasoka123@gmail.com">mondemasoka123@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <span class="label">Phone</span>
+      <a href="tel:+27774538300">077 453 830</a>
+    </div>
+    <div class="contact-item">
+      <span class="label">Location</span>
+      <span>Khayelitsha, Cape Town</span>
+    </div>
+    <div class="contact-item">
+      <span class="label">GitHub</span>
+      <a href="https://github.com/Champion2026gif" target="_blank" rel="noopener">Champion2026gif</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>References available on request.</span>
+  <span>© 2026 Monde Shaun Masoka</span>
+</footer>
+
+</body>
+</html>
